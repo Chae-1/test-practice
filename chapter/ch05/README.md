@@ -93,3 +93,8 @@ Practical Test
 어떤 환경에서(Given), 어떤 행동을 진행했을 때(When), 어떤 상태 변화가 일어난다.(Then)
 
 결과, DisplayName에 정확히 작성이 가능하다.
+
+## 키워드 정리
+- @DisplayName
+- Given / When / Then
+- Junit vs Spock

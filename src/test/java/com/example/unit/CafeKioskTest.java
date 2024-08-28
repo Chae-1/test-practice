@@ -92,7 +92,9 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("")
     void calculateTotalPrice() {
+        // given
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
 
@@ -103,4 +105,16 @@ class CafeKioskTest {
         assertThat(order.getBeverages()).hasSize(1);
         assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
     }
+
+
+    @DisplayName("")
+    @Test
+    void test() {
+        // given
+
+        // when
+
+        // then
+    }
+
 }
