@@ -50,3 +50,12 @@ spring:
   sql:
     init:
       mode: never
+
+logging:
+  level:
+    org:
+      hibernate:
+      springframework:
+        transaction: DEBUG
+        orm:
+          jpa: DEBUG
