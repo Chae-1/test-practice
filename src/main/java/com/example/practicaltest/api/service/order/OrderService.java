@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -36,6 +36,7 @@ public class OrderService {
      * optimistic lock / pessimistic lock / ...
      * 먼저 요청한 순으로 처리할 수 있도록 처리 고려.
      */
+    @Transactional
     public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registerDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = productRepository.findAllByProductNumberIn(productNumbers);

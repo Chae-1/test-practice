@@ -12,24 +12,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * readOnly = true : 읽기 전용
- * JPA : CUD 스냅샷 저장. 변경감지 X
- *
- * CQRS - Command / Read
- *
+ * readOnly = true : 읽기 전용 JPA : CUD 스냅샷 저장. 변경감지 X
+ * <p>
+ * CQRS - Command / Query
+ * - 커맨드용 서비스와 쿼리용 서비스를 분리하자.
  */
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-    // 동시성 이슈
-    // UUID
-    @Transactional
+
+    @Transactional // command
     public ProductResponse createProduct(ProductCreateRequest request) {
         // nextProductNumber
         String nextProductNumber = createNextProductNumber();
-
 
         Product product = request.toEntity(nextProductNumber);
         Product savedProduct = productRepository.save(product);
@@ -46,7 +43,7 @@ public class ProductService {
                 .toList();
     }
 
-    public String createNextProductNumber() {
+    private String createNextProductNumber() {
         String latestProductNumber = productRepository.findLatestProductNumber();
         if (latestProductNumber == null) {
             return "001";
