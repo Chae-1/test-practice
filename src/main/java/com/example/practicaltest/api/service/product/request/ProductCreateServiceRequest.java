@@ -1,19 +1,14 @@
-package com.example.practicaltest.api.controller.product.dto.request;
+package com.example.practicaltest.api.service.product.request;
 
 import com.example.practicaltest.domain.product.Product;
 import com.example.practicaltest.domain.product.ProductSellingStatus;
 import com.example.practicaltest.domain.product.ProductType;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Getter
-@NoArgsConstructor
-public class ProductCreateRequest {
-
+public class ProductCreateServiceRequest {
     @NotNull(message = "상품 타입은 필수입니다.")
     private ProductType type;
 
@@ -27,7 +22,7 @@ public class ProductCreateRequest {
     private int price;
 
     @Builder
-    public ProductCreateRequest(ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
+    public ProductCreateServiceRequest(ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
 
         this.type = type;
         this.sellingStatus = sellingStatus;
