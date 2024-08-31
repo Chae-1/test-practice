@@ -57,3 +57,12 @@
   - 편리하지만 쿼리를 직접 작성하지 않기 때문에, 어떤 식으로 쿼리가 만들어지는지 명확하게 이해해야함.
   - Query Dsl 조합하여 많이 사용함.
 
+
+## 키워드 정리
+- Layered Architecture
+- Hexagonal Architecture
+- 단위 테스트 vs 통합 테스트
+- IoC, DI, AOP
+- ORM, 패러다임 불일치, Hibernate
+- Spring Data JPA
+- 
