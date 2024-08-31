@@ -7,6 +7,8 @@ import com.example.practicaltest.domain.product.ProductRepository;
 import com.example.practicaltest.domain.product.ProductSellingStatus;
 import com.example.practicaltest.domain.product.ProductType;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.groups.Tuple;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import java.util.List;
 import static com.example.practicaltest.domain.product.ProductSellingStatus.*;
 import static com.example.practicaltest.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.groups.Tuple.tuple;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -30,6 +32,10 @@ class ProductServiceTest {
     @Autowired
     private ProductRepository productRepository;
 
+    @AfterEach
+    void tearDown() {
+        productRepository.deleteAllInBatch();
+    }
 
     @DisplayName("신규 상품을 등록한다. 상품 번호는 가장 최근 상품의 상품 번호에서 1증가한 값이다.")
     @Test
@@ -51,6 +57,14 @@ class ProductServiceTest {
         assertThat(productResponse)
                 .extracting("productNumber", "type", "sellingType", "name", "price")
                 .contains("002", HANDMADE, SELLING, "카푸치노", 5000);
+
+        List<Product> products = productRepository.findAll();
+        assertThat(products).hasSize(2)
+                .extracting("productNumber", "type", "sellingStatus", "name", "price")
+                .containsExactlyInAnyOrder(
+                        tuple("001", HANDMADE, SELLING, "아메리카노", 4000),
+                        tuple("002", HANDMADE, SELLING, "카푸치노", 5000)
+                );
     }
 
     @Test
@@ -70,7 +84,7 @@ class ProductServiceTest {
         // then
         assertThat(productResponse)
                 .extracting("productNumber", "type", "sellingType", "name", "price")
-                .contains("002", HANDMADE, SELLING, "카푸치노", 5000);
+                .contains("001", HANDMADE, SELLING, "카푸치노", 5000);
     }
 
     private Product createProduct(String productNumber, ProductType productType, ProductSellingStatus sellingStatus,
