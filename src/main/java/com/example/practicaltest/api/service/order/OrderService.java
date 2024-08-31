@@ -3,7 +3,8 @@ package com.example.practicaltest.api.service.order;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
-import com.example.practicaltest.api.controller.order.request.OrderCreateRequest;
+import com.example.practicaltest.api.controller.order.request.OrderCreateRequeset;
+import com.example.practicaltest.api.service.order.request.OrderCreateServiceRequest;
 import com.example.practicaltest.api.service.order.response.OrderResponse;
 import com.example.practicaltest.domain.order.Order;
 import com.example.practicaltest.domain.order.OrderRepository;
@@ -37,7 +38,7 @@ public class OrderService {
      * 먼저 요청한 순으로 처리할 수 있도록 처리 고려.
      */
     @Transactional
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registerDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registerDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = productRepository.findAllByProductNumberIn(productNumbers);
 

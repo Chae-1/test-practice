@@ -1,17 +1,13 @@
 package com.example.practicaltest.api.service.order;
 
-import static com.example.practicaltest.domain.product.ProductSellingStatus.HOLD;
-import static com.example.practicaltest.domain.product.ProductSellingStatus.SELLING;
-import static com.example.practicaltest.domain.product.ProductSellingStatus.STOP_SELLING;
 import static com.example.practicaltest.domain.product.ProductType.BAKERY;
 import static com.example.practicaltest.domain.product.ProductType.BOTTLE;
 import static com.example.practicaltest.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.groups.Tuple.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 
-import com.example.practicaltest.api.controller.order.request.OrderCreateRequest;
+import com.example.practicaltest.api.controller.order.request.OrderCreateRequeset;
 import com.example.practicaltest.api.service.order.response.OrderResponse;
 import com.example.practicaltest.domain.order.OrderRepository;
 import com.example.practicaltest.domain.orderproduct.OrderProductRepository;
@@ -22,16 +18,13 @@ import com.example.practicaltest.domain.stock.Stock;
 import com.example.practicaltest.domain.stock.StockRepository;
 import java.time.LocalDateTime;
 import java.util.List;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.groups.Tuple;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @ActiveProfiles("test")
@@ -67,7 +60,7 @@ class OrderServiceTest {
     void createOrder() {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
-        OrderCreateRequest request = OrderCreateRequest.builder()
+        OrderCreateRequeset request = OrderCreateRequeset.builder()
                 .productNumbers(List.of("001", "002"))
                 .build();
         Product product1 = createProduct(HANDMADE, "001", 1000);
@@ -96,7 +89,7 @@ class OrderServiceTest {
     void createOrderWithDuplicateProductNumbers() {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
-        OrderCreateRequest request = OrderCreateRequest.builder()
+        OrderCreateRequeset request = OrderCreateRequeset.builder()
                 .productNumbers(List.of("001", "001"))
                 .build();
 
@@ -127,7 +120,7 @@ class OrderServiceTest {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
 
-        OrderCreateRequest request = OrderCreateRequest.builder()
+        OrderCreateRequeset request = OrderCreateRequeset.builder()
                 .productNumbers(List.of("001", "001", "002", "003"))
                 .build();
 
@@ -172,7 +165,7 @@ class OrderServiceTest {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
 
-        OrderCreateRequest request = OrderCreateRequest.builder()
+        OrderCreateRequeset request = OrderCreateRequeset.builder()
                 .productNumbers(List.of("001", "001", "002", "003"))
                 .build();
 
