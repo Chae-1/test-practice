@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.groups.Tuple.tuple;
 
-import com.example.practicaltest.api.controller.order.request.OrderCreateRequeset;
+import com.example.practicaltest.api.service.order.request.OrderCreateServiceRequest;
 import com.example.practicaltest.api.service.order.response.OrderResponse;
 import com.example.practicaltest.domain.order.OrderRepository;
 import com.example.practicaltest.domain.orderproduct.OrderProductRepository;
@@ -60,7 +60,7 @@ class OrderServiceTest {
     void createOrder() {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
-        OrderCreateRequeset request = OrderCreateRequeset.builder()
+        OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
                 .productNumbers(List.of("001", "002"))
                 .build();
         Product product1 = createProduct(HANDMADE, "001", 1000);
@@ -89,7 +89,7 @@ class OrderServiceTest {
     void createOrderWithDuplicateProductNumbers() {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
-        OrderCreateRequeset request = OrderCreateRequeset.builder()
+        OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
                 .productNumbers(List.of("001", "001"))
                 .build();
 
@@ -120,7 +120,7 @@ class OrderServiceTest {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
 
-        OrderCreateRequeset request = OrderCreateRequeset.builder()
+        OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
                 .productNumbers(List.of("001", "001", "002", "003"))
                 .build();
 
@@ -165,7 +165,7 @@ class OrderServiceTest {
         // given
         LocalDateTime registeredDateTime = LocalDateTime.now();
 
-        OrderCreateRequeset request = OrderCreateRequeset.builder()
+        OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
                 .productNumbers(List.of("001", "001", "002", "003"))
                 .build();
 

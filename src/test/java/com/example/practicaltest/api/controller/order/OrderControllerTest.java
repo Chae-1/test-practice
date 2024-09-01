@@ -1,6 +1,6 @@
 package com.example.practicaltest.api.controller.order;
 
-import com.example.practicaltest.api.controller.order.request.OrderCreateRequeset;
+import com.example.practicaltest.api.controller.order.request.OrderCreateRequest;
 import com.example.practicaltest.api.service.order.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +34,7 @@ class OrderControllerTest {
     @Test
     void createOrder() throws Exception {
         // given
-        OrderCreateRequeset request = OrderCreateRequeset.builder()
+        OrderCreateRequest request = OrderCreateRequest.builder()
                 .productNumbers(List.of("001"))
                 .build();
 
@@ -53,7 +53,7 @@ class OrderControllerTest {
     @Test
     void createOrderWithoutProduct() throws Exception {
         // given
-        OrderCreateRequeset request = OrderCreateRequeset.builder()
+        OrderCreateRequest request = OrderCreateRequest.builder()
                 .productNumbers(List.of())
                 .build();
 

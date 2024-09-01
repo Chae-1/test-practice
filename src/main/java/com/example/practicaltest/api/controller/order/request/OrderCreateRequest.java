@@ -2,6 +2,7 @@ package com.example.practicaltest.api.controller.order.request;
 
 import java.util.List;
 
+import com.example.practicaltest.api.service.order.request.OrderCreateServiceRequest;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +20,8 @@ public class OrderCreateRequest {
         this.productNumbers = productNumbers;
     }
 
-    public OrderCreateRequest toServiceRequest() {
-        return OrderCreateRequest
+    public OrderCreateServiceRequest toServiceRequest() {
+        return OrderCreateServiceRequest
                 .builder()
                 .productNumbers(productNumbers)
                 .build();

@@ -44,4 +44,13 @@ public class ProductCreateRequest {
                 .sellingStatus(sellingStatus)
                 .build();
     }
+
+    public ProductCreateRequest toServiceRequest() {
+        return ProductCreateRequest.builder()
+                .type(type)
+                .name(name)
+                .price(price)
+                .sellingStatus(sellingStatus)
+                .build();
+    }
 }
